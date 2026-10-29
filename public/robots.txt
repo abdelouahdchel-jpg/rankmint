@@ -1,6 +1,11 @@
 # robots.txt for RankMint
-# Configure canonical domain in site.ts before production launch
+# PRE-LAUNCH STAGING CONFIGURATION:
+# NOTE: "https://rankmint.pages.dev" is a temporary placeholder/staging domain.
+# Before production launch, replace this placeholder with your confirmed custom domain
+# both in this file and in src/config/site.ts.
+
 User-agent: *
 Allow: /
 
+# Sitemap placeholder (update to your confirmed production domain before launch):
 Sitemap: https://rankmint.pages.dev/sitemap.xml

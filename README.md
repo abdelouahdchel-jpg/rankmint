@@ -2,6 +2,9 @@
 
 RankMint is a complete, professional, mobile-first suite of five essential SEO and web utilities. It executes 100% client-side in the user's browser with zero server uploads, zero external API costs, and zero required logins or databases.
 
+> **Pre-Launch Staging Notice:**
+> The domain `https://rankmint.pages.dev` referenced throughout this codebase is a temporary staging/preview placeholder. A custom production domain has not yet been registered or attached. Before launching to production, configure your confirmed custom domain as detailed in the checklist below.
+
 ---
 
 ## 🛠️ The 5 In-Browser Tools
@@ -9,68 +12,88 @@ RankMint is a complete, professional, mobile-first suite of five essential SEO a
 1. **Image to PNG Converter (`/tools/image-to-png`)**:
    - Converts JPG, JPEG, and WebP images to PNG entirely in the browser using HTML5 Canvas.
    - Live visual preview, original and converted byte size comparison, dimension inspection, and instant download.
-   - File type validation and 25 MB size limits.
+   - File type validation (rejects invalid formats) and 25 MB safety limit to protect browser memory.
    - Educational notice explicitly explaining that converting an image with an opaque background to PNG does *not* create transparency automatically.
 
 2. **SERP Snippet Preview (`/tools/serp-preview`)**:
    - Desktop and Mobile Google search result simulators.
-   - Dynamic title (~600px / 60 chars) and description (~960px / 160 chars) pixel width and character count meters with truncation alerts.
+   - Proportional pixel width calculations (~600px desktop title, ~960px description) and character count meters with real-time truncation alerts.
    - Real-time search query bolding simulation and date toggle.
-   - Realistic Google search card styling and prominent algorithmic rewrite disclaimer.
+   - Realistic Google search card styling and prominent algorithmic rewrite disclaimer explaining that search engines frequently rewrite snippets.
 
 3. **Meta Tag Generator (`/tools/meta-tag-generator`)**:
-   - Generates sanitized, copyable HTML head tags for titles, descriptions, canonical links, robots directives (`noindex`, `nofollow`, `noarchive`, `nosnippet`, `max-image-preview`), Open Graph, and Twitter Cards.
+   - Generates sanitized, copyable HTML head tags for titles, descriptions, canonical links, robots directives (`index`/`noindex`, `follow`/`nofollow`, `noarchive`, `nosnippet`, `max-image-preview`), Open Graph, and Twitter Cards.
    - Safe HTML attribute escaping (XSS prevention).
    - "Sync from Basic" utility and copy/download actions.
-   - Clarifies which tags are essential vs optional.
+   - Explains which tags are essential vs optional.
 
 4. **Schema Markup Generator (`/tools/schema-generator`)**:
    - Generates valid JSON-LD structured data for `Organization`, `WebSite`, `Article`, and `FAQPage`.
    - Real-time JSON syntax validation and error reporting.
    - Embeddable `<script type="application/ld+json">` output with copy and `.jsonld` download.
-   - Disclaims any ranking guarantees or automatic rich snippet awards.
+   - Disclaims any ranking guarantees or automatic rich snippet awards, warning against misleading structured data.
 
 5. **Article Outline Generator (`/tools/article-outline-generator`)**:
-   - Deterministic, transparent local editorial heuristics based on audience, intent, and format.
+   - Deterministic, transparent local editorial heuristics based on target keyword, audience, and format.
    - Generates 4 H1 options, search intent analysis, intro hooks, H2/H3 hierarchy with estimated word counts, and search-intent FAQs.
    - Copy as Markdown, copy as plain text, or download as `.md`.
-   - Explicitly does *not* claim AI power or call remote LLMs.
+   - **Note:** This tool uses 100% deterministic local rule-based templates. It is strictly not AI-powered and makes zero external API calls.
 
 ---
 
 ## 📚 8 Original Technical Blog Articles
 
-The website includes eight in-depth, original English guides featuring internal links to relevant tools:
-1. `how-to-convert-jpg-to-png-for-free`: In-browser canvas conversion vs server uploads, data privacy, and lossless DEFLATE encoding.
-2. `jpg-vs-png-whats-the-difference`: Lossy DCT vs lossless DEFLATE, alpha transparency, and format decision matrix.
-3. `how-to-preview-your-google-search-snippet`: Pixel vs character boundaries, mobile SERP dynamics, and algorithmic snippet rewrites.
-4. `how-to-write-better-meta-titles-and-descriptions`: Value-Keyword-Brand formula, PAS description framework, and CTR optimization.
-5. `what-is-schema-markup-beginners-guide`: Semantic Web principles, JSON-LD vs Microdata, and realistic expectations.
-6. `how-to-generate-json-ld-for-a-website`: Step-by-step schema coding, `<head>` implementation, and validation tools.
-7. `common-meta-tag-mistakes-to-avoid`: Staging noindex leakage, canonical inconsistencies, and obsolete meta tags.
-8. `how-to-optimize-images-for-seo`: Display dimensions, aspect ratios, descriptive alt text, and Core Web Vitals (LCP/CLS).
+RankMint includes eight original, substantive technical guides with natural internal links to the corresponding tools:
+
+1. **How to Convert JPG to PNG for Free (`/blog/how-to-convert-jpg-to-png-for-free`)**: In-browser canvas conversion vs server uploads, data privacy benefits, and why lossless DEFLATE encoding affects file size. Links to Image to PNG Converter.
+2. **JPG vs PNG: What's the Difference? (`/blog/jpg-vs-png-whats-the-difference`)**: Technical comparison between lossy DCT and lossless DEFLATE compression, 24-bit RGB vs 32-bit RGBA with alpha channels, and format selection criteria. Links to Image to PNG Converter.
+3. **How to Preview Your Google Search Snippet (`/blog/how-to-preview-your-google-search-snippet`)**: Pixel boundaries vs character limits, mobile SERP dynamics, and why search engines dynamically rewrite over 60% of snippets. Links to SERP Snippet Preview.
+4. **How to Write Better Meta Titles and Descriptions (`/blog/how-to-write-better-meta-titles-and-descriptions`)**: Actionable copywriting frameworks (Value + Keyword + Brand, PAS framework), avoiding keyword stuffing, and search intent alignment. Links to SERP Preview & Meta Tag Generator.
+5. **What Is Schema Markup? A Beginner's Guide (`/blog/what-is-schema-markup-beginners-guide`)**: Semantic Web principles, JSON-LD vs Microdata, Knowledge Graph connections, and realistic expectations regarding rich results. Links to Schema Generator.
+6. **How to Generate JSON-LD for a Website (`/blog/how-to-generate-json-ld-for-a-website`)**: Step-by-step schema implementation for Organization, WebSite, Article, and FAQPage, `<head>` injection, and validation with Google's Rich Results Test. Links to Schema Generator.
+7. **Common Meta Tag Mistakes to Avoid (`/blog/common-meta-tag-mistakes-to-avoid`)**: Unintended staging noindex leakage, missing or conflicting canonical tags, obsolete meta tags, and Open Graph oversights. Links to Meta Tag Generator.
+8. **How to Optimize Images for SEO (`/blog/how-to-optimize-images-for-seo`)**: Display dimensions, aspect ratios, descriptive alt text, modern formats, and Core Web Vitals (LCP/CLS) impact. Links to Image to PNG Converter.
 
 ---
 
-## ⚙️ Central Brand & Domain Configuration
+## 💻 Technology Stack
 
-All branding, canonical URLs, contact endpoints, and author metadata are defined in one central configuration file:
+Confirmed project dependencies:
+- **Framework:** React 19 (functional components, hooks)
+- **Language:** TypeScript
+- **Build Tool:** Vite 8
+- **Styling:** Tailwind CSS v4 (via `@tailwindcss/vite` and `@import "tailwindcss";`)
+- **Icons:** Lucide React (`lucide-react`)
+- **Architecture:** 100% Client-Side Single Page Application (SPA) with zero external databases or mandatory runtime servers.
+
+---
+
+## ⚙️ Central Configuration (`src/config/site.ts`)
+
+All branding, canonical URLs, contact endpoints, and author metadata are controlled from a single configuration file:
+
 ```typescript
 // Located at: src/config/site.ts
 export const siteConfig = {
-  brandName: 'RankMint',          // Change brand name here
-  domain: 'https://rankmint.pages.dev', // Change canonical domain here
-  contactEmail: 'contact@example.com',
+  brandName: 'RankMint',
+  tagline: 'Free Client-Side SEO Tools',
+  // Staging placeholder domain:
+  domain: 'https://rankmint.pages.dev',
+  isPlaceholderDomain: true,
+  contactEmail: 'brayachmohamad@gmail.com',
+  author: 'RankMint Editorial Team',
+  lastUpdatedYear: 2026,
   // ...
 };
 ```
-Modifying this single file propagates across the header, footer, SEO metadata tags, Open Graph cards, sitemaps, and breadcrumbs.
+
+Updating this configuration cascades throughout the application header, footer, page meta titles, canonical links, Open Graph tags, and breadcrumbs.
 
 ---
 
-## 🚀 Local Development
+## 🚀 Local Installation & Development
 
-1. **Clone or navigate to the repository:**
+1. **Navigate to the app directory:**
    ```bash
    cd applet
    ```
@@ -88,70 +111,81 @@ Modifying this single file propagates across the header, footer, SEO metadata ta
 
 ---
 
-## 🏗️ Building for Production
+## 🏗️ Production Build
 
-Compile the optimized static build:
+To run the TypeScript type check and compile an optimized static bundle:
+
 ```bash
+# 1. Validate TypeScript without emitting
+npm run lint
+
+# 2. Build production assets into dist/
 npm run build
 ```
-The output files will be created in the `dist/` directory.
 
-To verify the production build locally:
+To preview the production bundle locally before deployment:
 ```bash
 npm run preview
 ```
 
 ---
 
-## ☁️ Deploying to Free Cloudflare Pages
+## ☁️ Free Cloudflare Pages Deployment Instructions
 
-RankMint is completely static and free of any backend or database requirements, making it ideal for free hosting on Cloudflare Pages.
+Because RankMint requires zero server compute or database resources, it can be deployed for free on Cloudflare Pages.
 
-### Method 1: Git Integration (Recommended)
+### Step 1: Connect Git Repository
 1. Push your repository to GitHub or GitLab.
-2. Log into the [Cloudflare Dashboard](https://dash.cloudflare.com/) and navigate to **Workers & Pages** > **Create Application** > **Pages** > **Connect to Git**.
+2. Sign in to the [Cloudflare Dashboard](https://dash.cloudflare.com/) and go to **Compute (Workers) & Pages** > **Create application** > **Pages** > **Connect to Git**.
 3. Select your repository.
-4. In the build settings:
-   - **Framework preset**: `Vite`
-   - **Build command**: `npm run build`
-   - **Build output directory**: `dist`
-5. Click **Save and Deploy**.
 
-### SPA Direct Route Handling on Cloudflare Pages
-RankMint includes a `public/_redirects` file with the following rule:
+### Step 2: Configure Build Settings
+- **Project name:** `rankmint` (or your preferred name)
+- **Framework preset:** `Vite`
+- **Build command:** `npm run build`
+- **Build output directory:** `dist`
+- Click **Save and Deploy**.
+
+### Step 3: SPA Routing Support
+The repository includes a `public/_redirects` file containing:
 ```
 /* /index.html 200
 ```
-This ensures that deep URLs (such as `/tools/image-to-png` or `/blog/how-to-optimize-images-for-seo`) route properly to `index.html` without returning a 404 error when directly visited or refreshed.
+This ensures Cloudflare Pages serves `index.html` for all deep paths (such as `/tools/serp-preview` or `/blog/how-to-optimize-images-for-seo`), allowing client-side routing to function seamlessly on direct visits or refreshes.
 
 ---
 
-## 🌐 Custom Domain Configuration
+## 🌐 Custom Domain Setup (Required Before Production Launch)
 
-To attach your real domain (e.g. `www.yourbrand.com`):
-1. In Cloudflare Pages, go to your project > **Custom domains** > **Set up a custom domain**.
-2. Enter your domain name and follow the DNS verification steps.
-3. Update `src/config/site.ts` with your new canonical domain:
-   ```typescript
-   domain: 'https://www.yourbrand.com'
+Before public launch, replace the temporary placeholder domain with your confirmed domain:
+
+1. **Add Custom Domain in Cloudflare Pages:**
+   - In your Cloudflare Pages dashboard, go to **Custom domains** > **Set up a custom domain**.
+   - Enter your domain (e.g., `www.example.com` or `example.com`) and complete the automatic DNS verification.
+
+2. **Update Codebase Configuration:**
+   - In `src/config/site.ts`: Update `domain: 'https://www.yourdomain.com'` and set `isPlaceholderDomain: false`.
+   - In `public/robots.txt`: Update `Sitemap: https://www.yourdomain.com/sitemap.xml`.
+   - In `public/sitemap.xml`: Replace `https://rankmint.pages.dev` with `https://www.yourdomain.com`.
+   - In `index.html`: Update the `og:url` meta tag with your confirmed domain.
+
+3. **Rebuild and push:**
+   ```bash
+   npm run build
+   git commit -am "Configure production custom domain"
+   git push
    ```
-4. Rebuild and commit (`npm run build`).
 
 ---
 
 ## ✅ Pre-Launch Verification Checklist
 
-Before publishing your production instance:
-- [ ] **Branding:** Confirm your desired brand name in `src/config/site.ts`.
-- [ ] **Domain:** Set `siteConfig.domain` in `src/config/site.ts` to match your production URL.
-- [ ] **Sitemap & Robots:** Update `public/robots.txt` and `public/sitemap.xml` with your production domain.
-- [ ] **Contact Form:** If you want web-based form submissions instead of `mailto:`, hook up a service such as Formspree, Cloudflare Worker, or EmailJS in `src/pages/ContactPage.tsx`.
-- [ ] **Build Validation:** Run `npm run lint` and `npm run build` to confirm zero compilation errors.
-- [ ] **Mobile Testing:** Verify navigation, image converter dropzone, and SERP preview tools on iOS and Android viewports.
+Complete this checklist prior to public announcement or search engine submission:
 
----
-
-## ⚠️ Notes & Current Architecture Limitations
-
-- **Image Transparency:** The Image to PNG Converter uses browser Canvas to convert pixel buffers losslessly to PNG format. It does not automatically remove backgrounds from photos with solid backgrounds.
-- **Search Engine Snippet Disclaimers:** As documented throughout the application, Google algorithmically rewrites search snippets for more than 60% of search queries depending on search intent. Previewing a snippet provides a benchmark for title and description cutoffs, but does not guarantee search engine rendering.
+- [ ] **Brand Name:** Verify `brandName` in `src/config/site.ts`.
+- [ ] **Custom Domain:** Replace `https://rankmint.pages.dev` with your confirmed domain in `src/config/site.ts`, `public/robots.txt`, and `public/sitemap.xml`.
+- [ ] **Contact Email:** Confirm `contactEmail` is set to `brayachmohamad@gmail.com` in `src/config/site.ts`.
+- [ ] **Form Handling:** If web form submissions to an inbox are preferred over the client-side `mailto:` generator, connect a free service like Formspree or a Cloudflare Worker as documented on `/contact`.
+- [ ] **Build Check:** Confirm `npm run lint` and `npm run build` pass with zero errors.
+- [ ] **Mobile Testing:** Verify all 5 tools (Canvas image conversion, SERP preview, Meta generator, Schema builder, and Outline planner) across mobile and desktop viewports.
+- [ ] **Search Engine Disclaimers:** Ensure disclaimers remain visible: tools do not guarantee rankings, and image conversion preserves source background pixels.

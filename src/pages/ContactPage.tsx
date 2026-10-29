@@ -3,7 +3,7 @@ import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { SeoHead } from '../components/layout/SeoHead';
 import { siteConfig } from '../config/site';
 import { NoticeBanner } from '../components/common/NoticeBanner';
-import { Mail, Send, AlertCircle, Info, ExternalLink } from 'lucide-react';
+import { Mail, Send, Info, Code2, ChevronDown, ChevronUp } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
   const [name, setName] = useState('');
@@ -11,28 +11,29 @@ export const ContactPage: React.FC = () => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [showIntegrationDocs, setShowIntegrationDocs] = useState(false);
 
   const handleDraftEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !message) {
+    if (!name.trim() || !email.trim() || !message.trim()) {
       setStatusMessage('Please complete your name, email, and message before drafting.');
       return;
     }
 
-    const emailSubject = encodeURIComponent(subject ? `[${siteConfig.brandName}] ${subject}` : `Inquiry for ${siteConfig.brandName}`);
+    const emailSubject = encodeURIComponent(subject.trim() ? `[${siteConfig.brandName}] ${subject.trim()}` : `Inquiry for ${siteConfig.brandName}`);
     const emailBody = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\nSent via ${siteConfig.brandName} contact interface`
+      `Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}\n\n(Sent via ${siteConfig.brandName} contact interface)`
     );
 
     window.location.href = `mailto:${siteConfig.contactEmail}?subject=${emailSubject}&body=${emailBody}`;
-    setStatusMessage('Draft opened in your email client. You can review and send your message directly.');
+    setStatusMessage('Draft generated in your device\'s email client. You can review and send your message directly.');
   };
 
   return (
     <div className="max-w-3xl mx-auto space-y-10">
       <SeoHead
         title="Contact & Technical Support"
-        description={`Get in touch with the ${siteConfig.brandName} editorial and development team. Direct email contact and static hosting submission guidelines.`}
+        description={`Get in touch with ${siteConfig.brandName}. Direct email contact with ${siteConfig.contactEmail} and static hosting submission guidelines.`}
         canonicalPath="/contact"
       />
 
@@ -43,30 +44,30 @@ export const ContactPage: React.FC = () => {
           Get in Touch
         </span>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
-          Contact & Technical Support
+          Contact & Support
         </h1>
         <p className="text-base text-slate-600 leading-relaxed">
-          Have feedback on our in-browser SEO tools, spotted an issue, or want to contribute a technical guide? Reach out to us below.
+          Have feedback on our in-browser SEO utilities, spotted an issue, or want to suggest an improvement? Contact us directly.
         </p>
       </header>
 
       {/* Honest Architectural Disclaimer Banner */}
       <NoticeBanner
         type="warning"
-        title="Static Hosting Endpoint Notice"
+        title="Static Hosting & Email Routing Notice"
       >
-        <strong>{siteConfig.brandName} currently operates as a static client-side web application without a remote backend server or active database endpoint.</strong> As a result, web forms cannot transmit background HTTP requests to a mailbox until the site owner configures a third-party form handler (such as Formspree, Cloudflare Workers, or EmailJS). To ensure your message is genuinely delivered, use the direct email link or draft button below. We never simulate fake &quot;message sent&quot; success indicators.
+        <strong>{siteConfig.brandName} is a 100% client-side static web application</strong> with zero remote databases or server-side mailers. To guarantee genuine communication without misleading &quot;message sent&quot; animations, the compose form below generates an email draft in your local mail client addressed to <strong>{siteConfig.contactEmail}</strong>.
       </NoticeBanner>
 
-      {/* Direct Contact Card */}
+      {/* Direct Email Contact Box */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4 shadow-sm">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center">
             <Mail className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-base font-bold text-slate-900">Direct Email Contact</h2>
-            <p className="text-xs text-slate-500">Fastest and most reliable communication channel</p>
+            <h2 className="text-base font-bold text-slate-900">Direct Contact Address</h2>
+            <p className="text-xs text-slate-500">Official inquiries and support</p>
           </div>
         </div>
 
@@ -86,9 +87,12 @@ export const ContactPage: React.FC = () => {
 
       {/* Interactive Form with Mailto Bridge */}
       <form onSubmit={handleDraftEmail} className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-5 shadow-sm">
-        <h2 className="text-base font-bold text-slate-900 pb-2 border-b border-slate-100">
-          Compose Message (Generates Email Draft)
-        </h2>
+        <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+          <h2 className="text-base font-bold text-slate-900">
+            Compose Message
+          </h2>
+          <span className="text-xs text-slate-400">Routes to: {siteConfig.contactEmail}</span>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-1.5">
@@ -171,6 +175,43 @@ export const ContactPage: React.FC = () => {
           </button>
         </div>
       </form>
+
+      {/* Developer Setup Guide for External Form Services */}
+      <div className="bg-slate-100/70 border border-slate-200 rounded-2xl p-5 text-xs text-slate-600 space-y-3">
+        <button
+          type="button"
+          onClick={() => setShowIntegrationDocs(!showIntegrationDocs)}
+          className="w-full flex items-center justify-between font-semibold text-slate-800 hover:text-emerald-700 transition-colors"
+        >
+          <span className="flex items-center gap-1.5">
+            <Code2 className="w-4 h-4 text-emerald-600" />
+            <span>Optional: How to configure an external form endpoint on static hosts</span>
+          </span>
+          {showIntegrationDocs ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+
+        {showIntegrationDocs && (
+          <div className="space-y-3 pt-2 border-t border-slate-200/80 leading-relaxed">
+            <p>
+              To maintain 100% free static hosting without paid servers, RankMint intentionally does not bundle a private backend mail server. If the site owner wishes to receive form posts directly over HTTP, they can connect any of the following free tier services:
+            </p>
+            <ol className="list-decimal pl-5 space-y-1.5">
+              <li>
+                <strong>Cloudflare Worker:</strong> Create a lightweight Worker on Cloudflare (free tier) with an HTTP POST handler that forwards submissions to Mailchannels or an email inbox.
+              </li>
+              <li>
+                <strong>Formspree / Basin / Formkeep:</strong> Create a free form endpoint at <code className="bg-white px-1.5 py-0.5 rounded border border-slate-200">formspree.io</code> and update the form <code className="bg-white px-1.5 py-0.5 rounded border border-slate-200">action=&quot;https://formspree.io/f/YOUR_FORM_ID&quot;</code>.
+              </li>
+              <li>
+                <strong>EmailJS:</strong> Client-side SDK that sends messages directly through your personal or business email provider.
+              </li>
+            </ol>
+            <p className="text-[11px] text-slate-500 italic">
+              Until an endpoint is configured, the built-in mailto: bridge above guarantees zero missed messages without deceiving visitors with fake success alerts.
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  RankMint XML Sitemap (Pre-Launch Staging Configuration)
+  
+  IMPORTANT NOTICE:
+  The URLs below use "https://rankmint.pages.dev" as a temporary placeholder domain.
+  Do NOT treat this as a verified live custom production domain.
+  
+  Before public production launch:
+  1. Replace all instances of "https://rankmint.pages.dev" with your confirmed production domain.
+  2. Update "domain" in "src/config/site.ts".
+  3. Update the Sitemap URL in "public/robots.txt".
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Core Pages -->
   <url>

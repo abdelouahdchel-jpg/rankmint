@@ -3,6 +3,11 @@
  * 
  * Edit this file to customize the brand name, canonical domain, contact details,
  * or navigation links without having to search through multiple component files.
+ * 
+ * PRE-LAUNCH STATUS:
+ * - Domain: "https://rankmint.pages.dev" is a temporary staging/preview placeholder.
+ *   Do not treat it as a confirmed production domain. Once your custom domain is registered
+ *   and verified, update the 'domain' field below.
  */
 
 export interface ToolDefinition {
@@ -30,11 +35,14 @@ export const siteConfig = {
   slogan: 'Professional SEO utilities running 100% in your browser. Zero tracking, zero uploads, zero cost.',
   description: 'Fast, secure, browser-based SEO tools. Convert JPG/WebP to PNG, preview Google SERP snippets, build meta tags, generate JSON-LD schema, and craft article outlines entirely on your device.',
 
-  // Domain & Canonical URL base (Update this when deploying to a custom domain)
+  // Domain & Canonical URL base
+  // NOTE: "https://rankmint.pages.dev" is a temporary staging/preview placeholder.
+  // Replace with your confirmed custom domain before public launch.
   domain: 'https://rankmint.pages.dev',
+  isPlaceholderDomain: true,
 
   // Contact & Publisher metadata
-  contactEmail: 'contact@example.com',
+  contactEmail: 'brayachmohamad@gmail.com',
   author: 'RankMint Editorial Team',
   lastUpdatedYear: 2026,
 
