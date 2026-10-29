@@ -1,0 +1,6 @@
+# robots.txt for RankMint
+# Configure canonical domain in site.ts before production launch
+User-agent: *
+Allow: /
+
+Sitemap: https://rankmint.pages.dev/sitemap.xml

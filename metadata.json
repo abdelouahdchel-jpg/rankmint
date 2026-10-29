@@ -1,0 +1,6 @@
+{
+  "name": "RankMint - Free Client-Side SEO Tools",
+  "description": "Professional, privacy-first SEO utility toolkit running 100% in your browser. Image to PNG converter, SERP snippet preview, meta tag generator, JSON-LD schema builder, and article outline planner.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
